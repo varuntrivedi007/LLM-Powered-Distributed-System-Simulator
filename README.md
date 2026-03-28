@@ -83,7 +83,6 @@ benchmark.py         Multi-size, multi-seed automated testing
 compare.py           LLM vs rule-only comparison mode
 generate_charts.py   Chart generation for 5/10-node results
 generate_charts_20.py Chart generation for 20-node results
-generate_ppt.py      Presentation generator (32 slides)
 ```
 
 ## Setup
