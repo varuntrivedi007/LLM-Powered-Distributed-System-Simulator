@@ -3,11 +3,7 @@ import time as _time
 
 
 class DecisionScorer:
-    """
-    Scores each recovery decision based on measurable outcomes.
-    Called after a decision is executed and again when the outcome is known.
-    """
-
+  
     def __init__(self):
         self._pending = {}     
         self._scores  = []     

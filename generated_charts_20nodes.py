@@ -1,18 +1,3 @@
-
-"""
-generate_charts_20.py
-Runs a fresh 20-node simulation using the API and generates the same
-presentation-ready charts as PNG files in a charts_20/ folder.
-
-Default behavior:
-    - Uses API by default
-    - Runs ONLY a 20-node simulation
-
-Usage:
-    python3 generate_charts_20.py
-    python3 generate_charts_20.py --logs   # optional: parse existing 20-node logs instead
-"""
-
 import os
 import sys
 import re

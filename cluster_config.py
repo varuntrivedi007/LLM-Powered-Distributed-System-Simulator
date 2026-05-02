@@ -1,11 +1,4 @@
 def generate_cluster(size=5):
-    """
-    Generate a cluster config of given size.
-    Roles are assigned as:
-    - 1 Primary
-    - 2 Replicas
-    - Rest alternating between Worker and Gateway
-    """
     config = []
     for i in range(1, size + 1):
         node_id = f"N{i}"
@@ -22,18 +15,6 @@ def generate_cluster(size=5):
 
 
 def generate_failures(injector, cluster_size=5):
-    """
-    Schedule failures scaled to cluster size.
-    Includes conflict scenarios, ambiguous cascades, and situations
-    that REQUIRE LLM reasoning — rules alone cannot resolve them optimally.
-
-    Key design principles:
-    - Phase 1-2: Warmup (rules handle), establishes baseline
-    - Phase 3-4: Overlapping failures that drop rule confidence to Tier 2/3
-    - Phase 5-6: Ambiguous cascades where the optimal action depends on
-      understanding trade-offs (restart vs isolate, quorum vs throughput)
-    - Phase 7: Recovery stress — optimization needed during recovery window
-    """
     
     injector.schedule_crash("N1", at_time=10, recover_after=5)
 

@@ -88,7 +88,7 @@ def schedule_failures(injector, num_nodes):
 
 
 def print_cluster_status(logger, env, network):
-    # Import here to avoid circular import at module level
+    
     from llm_agent import _shed_nodes
 
     logger.log("\n==================================================")

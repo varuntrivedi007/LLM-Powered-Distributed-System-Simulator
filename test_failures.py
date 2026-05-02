@@ -1,5 +1,3 @@
-# test_failures.py
-# Tests fault injection, failure resolution, and recovery mechanics
 import simpy
 from network import build_cluster, HEALTHY, DEGRADED, FAILED
 from failures import FaultInjector, FailureEvent
@@ -190,7 +188,7 @@ def test_primary_crash_election():
     injector = FaultInjector(env, network)
     injector.schedule_crash("N1", at_time=2.0, recover_after=10.0)
 
-    env.run(until=6.0)  # Allow time for consensus loop to detect and elect
+    env.run(until=6.0)  
 
     assert network.current_primary != "N1" or network.nodes["N1"].status != FAILED, \
         "Should have elected a new primary or N1 recovered"

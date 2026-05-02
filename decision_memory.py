@@ -9,11 +9,6 @@ MAX_CONTEXT_ENTRIES = 5
 
 
 class DecisionMemory:
-    """
-    Persistent memory of past decisions and their outcomes.
-    Enables cross-run learning by storing what worked and what didn't.
-    """
-
     def __init__(self, history_file=None):
         self._file = history_file or HISTORY_FILE
         self._history = []

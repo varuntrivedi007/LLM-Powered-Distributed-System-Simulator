@@ -1,5 +1,3 @@
-# test_network.py
-# Tests the SimPy-based distributed network simulation
 import simpy
 from network import build_cluster, HEALTHY, DEGRADED, FAILED
 
@@ -31,7 +29,7 @@ def test_single_primary_invariant():
     env = simpy.Environment()
     config = [
         {"id": "N1", "role": "Primary"},
-        {"id": "N2", "role": "Primary"},  # Should be demoted to Replica
+        {"id": "N2", "role": "Primary"},  
         {"id": "N3", "role": "Replica"},
     ]
     network = build_cluster(env, config)
@@ -75,12 +73,12 @@ def test_quorum_check():
     assert network._has_quorum(), "Should have quorum with all nodes healthy"
     print(f"  Quorum with all healthy: {network._has_quorum()}")
 
-    # Fail 2 of 3 — should lose quorum
+    
     network.nodes["N2"].status = FAILED
     network.nodes["N3"].status = FAILED
     has_q = network._has_quorum()
     print(f"  Quorum with 2 failed: {has_q}")
-    # With 3 voters, need 2 — only N1 is up, so no quorum
+    
     assert not has_q, "Should NOT have quorum with 2 of 3 nodes failed"
     print("  PASSED")
 
@@ -96,7 +94,7 @@ def test_leader_election():
     ])
     env.run(until=0.1)
 
-    # Fail primary
+    
     network.nodes["N1"].status = FAILED
     old_primary = network.current_primary
     new_primary = network.elect_new_primary()

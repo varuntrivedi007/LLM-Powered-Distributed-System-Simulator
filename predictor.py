@@ -1,8 +1,5 @@
 class HealthPredictor:
-    """
-    Tracks node health over time and predicts
-    which nodes are likely to fail soon.
-    """
+   
     def __init__(self):
         self._history = {}         
         self._alert_state = {}     

@@ -315,7 +315,7 @@ def _get_timeout_rate(network):
     stats = network.get_stats() if hasattr(network, "get_stats") else {}
     raw = stats.get("timeout_rate", "0%")
     try:
-        # Handle both "72.5%" and 0.725 formats
+        
         if isinstance(raw, str):
             return float(raw.replace("%", "")) / 100.0
         return float(raw)

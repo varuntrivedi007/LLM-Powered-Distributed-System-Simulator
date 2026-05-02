@@ -1,5 +1,3 @@
-# test_llm.py
-# Tests LLM integration: decision-making, optimization, analysis, and multi-turn reasoning
 import simpy
 from network import build_cluster
 from failures import FaultInjector, FailureEvent, CRASH, MEMORY_LEAK
@@ -59,12 +57,12 @@ def test_confidence_routing():
     ])
     env.run(until=1)
 
-    # Simple crash on a worker — should be obvious (Tier 1)
+    
     simple_event = FailureEvent(CRASH, "N3", env.now, "Worker crash")
     is_obvious = is_obvious_case(simple_event, network)
     print(f"  Worker crash is obvious: {is_obvious}")
 
-    # Memory leak — should NOT be obvious (Tier 2/3)
+    
     complex_event = FailureEvent(MEMORY_LEAK, "N1", env.now, "Primary memory leak")
     network.nodes["N1"].health = 40
     network.nodes["N1"].status = "degraded"
@@ -87,7 +85,7 @@ def test_batch_decisions():
     ])
     env.run(until=1)
 
-    # Simulate two simultaneous failures
+    
     failures = [
         FailureEvent(CRASH, "N4", env.now, "Worker crash"),
         FailureEvent(MEMORY_LEAK, "N5", env.now, "Gateway memory leak"),
@@ -118,7 +116,7 @@ def test_optimize_cluster():
     ])
     env.run(until=10)
 
-    # Create load imbalance to trigger optimization
+    
     network.nodes["N1"].load = 90
     network.nodes["N2"].load = 20
     network.nodes["N3"].load = 15
@@ -181,20 +179,20 @@ def test_execute_actions():
     network.nodes["N3"].status = "failed"
     network.nodes["N3"].health = 0
 
-    # Test restart
+    
     result = execute_action(network, "restart_node", "N3", mock_event, 1.0)
     print(f"  restart_node: {result}")
     assert "Restarted" in result, f"Expected restart result, got: {result}"
     assert network.nodes["N3"].health >= 80, "Health should be restored"
 
-    # Test rebalance
+    
     network.nodes["N1"].load = 80
     network.nodes["N2"].load = 20
     result = execute_action(network, "rebalance_load", "N1", mock_event, 2.0)
     print(f"  rebalance_load: {result}")
     assert "Rebalanced" in result, f"Expected rebalance result, got: {result}"
 
-    # Test reroute
+    
     network.nodes["N1"].load = 90
     result = execute_action(network, "reroute_traffic", "N1", mock_event, 3.0)
     print(f"  reroute_traffic: {result}")

@@ -189,7 +189,7 @@ def llm_decision_loop(env, network, injector):
                 )
                 _app_pending_scores[decision_id] = event
 
-        # Feedback follow-ups
+        
         follow_ups = run_feedback_checks(env.now, network)
         if ENABLE_FEEDBACK_FOLLOWUPS:
             for follow_up in follow_ups:

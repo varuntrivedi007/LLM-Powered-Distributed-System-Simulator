@@ -1,19 +1,3 @@
-
-"""
-generate_charts.py
-Runs fresh simulations using the API and generates presentation-ready
-charts as PNG files in a charts/ folder.
-
-Default behavior:
-    - Uses API by default
-    - Runs ONLY 5-node and 10-node simulations
-
-Usage:
-    python3 generate_charts.py
-    python3 generate_charts.py --sizes 5 10
-    python3 generate_charts.py --logs          # optional: parse existing logs instead
-"""
-
 import os
 import sys
 import re
